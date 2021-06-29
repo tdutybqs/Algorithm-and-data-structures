@@ -4,9 +4,7 @@
 template <typename T>
 class List{
 public:
-    List(): head(nullptr), my_size(0), my_empty(true) {
-        head = this;
-    }
+    List(): head(nullptr), my_size(0), my_empty(true) {}
     List(std::initializer_list<T> list_elem): my_size(0){
         for(auto& elem: list_elem){
             push_back(elem);
