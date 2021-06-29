@@ -84,6 +84,16 @@ public:
         ftemp->data = stemp->data;
         stemp->data = temp_data;
     }
+    int find(T value){
+        Node<T>* temp = this->head;
+        int position = 0;
+        while (temp->next != nullptr){
+            ++position;
+            if (temp->data == value) return position;
+            temp = temp->next;
+        }
+        return -1;
+    }
 private:
     void check_empty(){
         if (my_size > 0) my_empty = false;
