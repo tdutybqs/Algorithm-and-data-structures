@@ -1,6 +1,7 @@
 #include <iostream>
 #include <assert.h>
 
+
 template <typename T>
 class List{
 public:
@@ -41,11 +42,19 @@ public:
         --my_size;
         check_empty();
     }
-    auto front(){
+    T front(){
         return this->head->data;
     }
+    void insert(T value, int position){
+        Node<T>* temp = this->head;
+        while (position){
+            temp = temp->next;
+            --position;
+        }
+        temp->data = value;
+    }
     void pop_front(){
-        Node<T> *temp = this->head->next;
+        Node<T>* temp = this->head->next;
         delete this->head;
         this->head = temp;
         --my_size;
@@ -59,6 +68,21 @@ public:
         while (my_size){
             pop_front();
         }
+    }
+    void swap(int first, int second){
+        Node<T>* ftemp = this->head;
+        Node<T>* stemp = this->head;
+        while (first){
+            ftemp = ftemp->next;
+            --first;
+        }
+        while (second){
+            stemp = stemp->next;
+            --second;
+        }
+        T temp_data = ftemp->data;
+        ftemp->data = stemp->data;
+        stemp->data = temp_data;
     }
 private:
     void check_empty(){
