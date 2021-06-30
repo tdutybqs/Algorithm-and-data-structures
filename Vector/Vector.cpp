@@ -1,6 +1,4 @@
 #include <iostream>
-#include <initializer_list>
-#include <assert.h>
 
 template <typename T>
 class vector
@@ -36,11 +34,10 @@ public:
         return *this;
     }
     void pop_back(){
-        assert(my_size > 1);
         my_data[my_size].~T();
         --my_size;
     }
-    void resize(int size){
+    void resize(unsigned int size){
         if (size < my_size){
             for (int i = my_size; i > size; --i)
                 my_data[i].~T();
@@ -62,8 +59,7 @@ public:
         my_size++;
     }
     int size() { return my_size; }
-    T& operator[] (int i){
-        assert (i < my_size);
+    T& operator[] (unsigned int i){
         return my_data[i];
     }
     ~vector(){
@@ -89,7 +85,7 @@ private:
             my_data = tmp;
         }
     }
-    int my_capacity;
-    int my_size;
+    unsigned int my_capacity;
+    unsigned int my_size;
     T* my_data;
 };

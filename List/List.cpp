@@ -1,6 +1,4 @@
 #include <iostream>
-#include <assert.h>
-
 
 template <typename T>
 class List{
@@ -23,8 +21,7 @@ public:
         }
         ++my_size;
     }
-    T& operator[](int index){
-        assert(index < my_size);
+    T& operator[](unsigned int index){
         Node<T>* temp = this->head;
         while (index){
             temp = temp->next;
@@ -45,7 +42,7 @@ public:
     T front(){
         return this->head->data;
     }
-    void insert(T value, int position){
+    void insert(T value, unsigned int position){
         Node<T>* temp = this->head;
         while (position){
             temp = temp->next;
@@ -69,7 +66,7 @@ public:
             pop_front();
         }
     }
-    void swap(int first, int second){
+    void swap(unsigned int first, unsigned int second){
         Node<T>* ftemp = this->head;
         Node<T>* stemp = this->head;
         while (first){
@@ -106,6 +103,6 @@ private:
         Node<U>* next;
     };
     bool my_empty;
-    int my_size;
+    unsigned int my_size;
     Node<T>* head;
 };
