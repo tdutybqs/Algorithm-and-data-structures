@@ -58,7 +58,7 @@ public:
         }
         my_size++;
     }
-    int size() { return my_size; }
+    unsigned int size() { return my_size; }
     T& operator[] (unsigned int index){
         return my_data[index];
     }
@@ -69,7 +69,7 @@ public:
     ~vector(){
         clear();
     };
-    void reserve(int n){
+    void reserve(unsigned int n){
         if (n > my_capacity){
             my_capacity = n;
             T* tmp = static_cast<T*>(::operator new(sizeof(T) * my_capacity));
