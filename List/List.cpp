@@ -3,12 +3,11 @@
 template <typename T>
 class List{
 public:
-    List(): head(nullptr), my_size(0), my_empty(true) {}
+    List(): head(nullptr), my_size(0) {}
     List(std::initializer_list<T> list_elem): my_size(0){
         for(auto& elem: list_elem){
             push_back(elem);
         }
-        check_empty();
     }
     void push_back(T elem){
         if (this->head == nullptr) this->head = new Node<T>(elem);
@@ -29,7 +28,7 @@ public:
         }
         return temp->data;
     }
-    bool empty(){return my_empty;}
+    bool empty(){return my_size == 0;}
     void pop_back(){
         Node<T> *temp = this->head;
         while (temp->next!=nullptr){
@@ -37,7 +36,6 @@ public:
         }
         delete temp;
         --my_size;
-        check_empty();
     }
     T front(){
         return this->head->data;
@@ -55,7 +53,6 @@ public:
         delete this->head;
         this->head = temp;
         --my_size;
-        check_empty();
     }
     int size() {return my_size;}
     ~List(){
@@ -92,17 +89,12 @@ public:
         return -1;
     }
 private:
-    void check_empty(){
-        if (my_size > 0) my_empty = false;
-        else my_empty = true;
-    }
     template <typename U>
     struct Node{
         Node(U value, Node* pnext = nullptr): data(value), next(pnext){}
         U data;
         Node<U>* next;
     };
-    bool my_empty;
     unsigned int my_size;
     Node<T>* head;
 };
