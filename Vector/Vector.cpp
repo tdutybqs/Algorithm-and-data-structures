@@ -59,21 +59,16 @@ public:
         my_size++;
     }
     int size() { return my_size; }
-    T& operator[] (unsigned int i){
-        return my_data[i];
+    T& operator[] (unsigned int index){
+        return my_data[index];
+    }
+    T& at(unsigned int index){
+        if (index>=my_size) throw std::runtime_error("Index out of range");
+        else return my_data[index];
     }
     ~vector(){
         clear();
     };
-private:
-    void clear(){
-        for (int i = 0; i < my_size; ++i)
-            my_data[i].~T();
-        operator delete (my_data);
-        my_data = nullptr;
-        my_size = 0;
-        my_capacity = 0;
-    }
     void reserve(int n){
         if (n > my_capacity){
             my_capacity = n;
@@ -85,6 +80,15 @@ private:
             my_data = tmp;
         }
     }
+    void clear(){
+        for (int i = 0; i < my_size; ++i)
+            my_data[i].~T();
+        operator delete (my_data);
+        my_data = nullptr;
+        my_size = 0;
+        my_capacity = 0;
+    }
+private:
     unsigned int my_capacity;
     unsigned int my_size;
     T* my_data;
