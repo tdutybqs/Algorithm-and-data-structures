@@ -173,3 +173,36 @@ private:
     unsigned int my_size;
     T* my_data;
 };
+
+// only ++
+template <typename T>
+void advance_impl(T& it, typename std::iterator_traits<T>::difference_type n, std::input_iterator_tag) {
+    while (n > 0) {
+        ++it;
+        --n;
+    }
+}
+
+//++ --
+template <typename T>
+void advance_impl(T& it, typename std::iterator_traits<T>::difference_type n, std::bidirectional_iterator_tag) {
+    while (n > 0) {
+        ++it;
+        --n;
+    }
+    while (n < 0) {
+        --it;
+        ++n;
+    }
+}
+
+// step = n
+template <typename T>
+void advance_impl(T& it, typename std::iterator_traits<T>::difference_type n, std::random_access_iterator_tag) {
+    it += n;
+}
+
+template <typename T>
+void advance(T& it, int n) {
+    advance_impl(it, typename std::iterator_traits<T>::difference_type(n), typename std::iterator_traits<T>::iterator_category());
+};

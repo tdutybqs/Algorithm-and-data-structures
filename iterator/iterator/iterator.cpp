@@ -12,4 +12,7 @@ int main() {
 	}
 	std::cout <<"Iterator + n = " << *(a.begin() + 2) << std::endl;
 	std::cout <<"Equality = " << (a.begin() == a.begin()) << std::endl;
+	auto test = a.end();
+	advance(test, -4);
+	std::cout << "Advance = " << *test << std::endl;
 }
