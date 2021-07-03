@@ -3,4 +3,7 @@ C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\
 C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(121): message : во время компиляции функции-члена класс шаблон "void vector<int>::clear(void) noexcept"
 C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(108): message : выполняется компиляция ссылки на экземпляр шаблон функции "void vector<int>::clear(void) noexcept"
 C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\iterator.cpp(6): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "vector<int>"
+C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(114,31): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(110): message : во время компиляции функции-члена класс шаблон "void vector<int>::reserve(const unsigned int) noexcept"
+C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(93): message : выполняется компиляция ссылки на экземпляр шаблон функции "void vector<int>::reserve(const unsigned int) noexcept"
   iterator.vcxproj -> C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\Debug\iterator.exe

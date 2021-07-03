@@ -4,6 +4,7 @@
 
 int main() {
 	vector<int> a{ 1,2,3,4 };
+	a.push_back(10);
 	auto start = a.begin();
 	while (start != a.end()) {
 		std::cout << *start << " " << std::endl;

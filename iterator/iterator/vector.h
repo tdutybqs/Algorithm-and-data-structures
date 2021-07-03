@@ -24,7 +24,7 @@ public:
     Iterator begin() { return my_data; };
     Iterator end() { return (my_data + my_size); }
     vector() : my_data(nullptr), my_size(0), my_capacity(0) {};
-    vector(int const size, T const elem) : my_size(size), my_capacity(size * 2)
+    vector(const int size, const T elem) : my_size(size), my_capacity(size * 2)
         , my_data(static_cast<T*>(::operator new(sizeof(T)* my_capacity))) {
         for (int i = 0; i < size; ++i) {
             new (my_data + i) T(elem);
@@ -74,7 +74,7 @@ public:
         my_data[my_size].~T();
         --my_size;
     }
-    void resize(unsigned int const size) {
+    void resize(const unsigned int size) {
         if (size < my_size) {
             for (int i = my_size; i > size; --i)
                 my_data[i].~T();
@@ -85,7 +85,7 @@ public:
         }
         my_size = size;
     }
-    void push_back(T const elem) {
+    void push_back(const T elem) {
         if (my_size < my_capacity) {
             new (my_data + my_size) T(elem);
         }
@@ -97,17 +97,17 @@ public:
     }
     unsigned int capacity() const { return my_capacity; }
     unsigned int size() const { return my_size; }
-    T& operator[] (unsigned int index) const {
+    T& operator[] (const unsigned int index) const {
         return my_data[index];
     }
-    T& at(unsigned int const index) const {
+    T& at(const unsigned int index) const {
         if (index >= my_size) throw std::runtime_error("Index out of range");
         else return my_data[index];
     }
     ~vector() noexcept {
         clear();
     };
-    void reserve(unsigned int const n) noexcept {
+    void reserve(const unsigned int n) noexcept {
         if (n > my_capacity) {
             my_capacity = n;
             T* tmp = static_cast<T*>(::operator new(sizeof(T) * my_capacity));
