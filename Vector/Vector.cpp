@@ -76,19 +76,19 @@ public:
         }
         my_size++;
     }
-    unsigned int capacity(){return my_capacity;}
-    unsigned int size() { return my_size; }
-    T& operator[] (unsigned int index){
+    unsigned int capacity() const {return my_capacity;}
+    unsigned int size() const { return my_size; }
+    T& operator[] (unsigned int index) const{
         return my_data[index];
     }
-    T& at(unsigned int const index){
+    T& at(unsigned int const index) const{
         if (index>=my_size) throw std::runtime_error("Index out of range");
         else return my_data[index];
     }
-    ~vector(){
+    ~vector() noexcept{
         clear();
     };
-    void reserve(unsigned int const n){
+    void reserve(unsigned int const n) noexcept{
         if (n > my_capacity){
             my_capacity = n;
             T* tmp = static_cast<T*>(::operator new(sizeof(T) * my_capacity));
@@ -99,7 +99,7 @@ public:
             my_data = tmp;
         }
     }
-    void clear(){
+    void clear() noexcept{
         for (int i = 0; i < my_size; ++i)
             my_data[i].~T();
         operator delete (my_data);
