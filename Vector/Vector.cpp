@@ -2,27 +2,56 @@
 #include <iostream>
 #endif
 
+template<typename T>
+class vector;
+
 template <typename T>
-class vector
-{
+class my_iterator {
 public:
-    class Iterator{
-    public:
-        Iterator(T* first) : element(first) {}
-        T& operator+ (int n) { return *(element + n); }
-        T& operator- (int n) { return *(element - n); }
-        T& operator++ (int) { return *element++; }
-        T& operator-- (int) { return *element--; }
-        T& operator++ () { return *++element; }
-        T& operator-- () { return *--element; }
-        bool operator!= (const Iterator& it) { return element != it.element; }
-        bool operator== (const Iterator& it) { return element == it.element; }
-        T& operator* () { return *element; }
-    private:
-        T* element;
-    };
-    Iterator begin() { return my_data; };
-    Iterator end() { return (my_data + my_size); }
+    using value_type = T;
+    using reference = T&;
+    using pointer = T*;
+    using difference_type = std::ptrdiff_t;
+    using iterator_category = std::random_access_iterator_tag;
+
+    reference operator+ (const int n) { return *(element + n); }
+    reference operator- (const int n) { return *(element - n); }
+    reference operator++ (const int) { return *element++; }
+    reference operator-- (const int) { return *element--; }
+    reference operator++ () { return *++element; }
+    reference operator-- () { return *--element; }
+    
+    friend bool operator==(const my_iterator& lhs, const my_iterator& rhs){
+        return lhs.element == rhs.element;
+    }
+    friend bool operator!=(const my_iterator& lhs, const my_iterator& rhs){
+        return !(lhs == rhs);
+    }
+
+    pointer operator->() { return this->element; }
+    const pointer operator->() const { return this->element; }
+
+    reference operator[](int n) {
+        return *(this->element + n);
+    }
+    const reference operator[](int n) const {
+        return *(this->element + n);
+    }
+
+    reference operator* () { return *element; }
+    const reference operator* () const { return *element; }
+private:
+    my_iterator() = default;
+    my_iterator(T* first) : element(first) {}
+    T* element{ nullptr };
+    friend class vector<T>;
+};
+
+template <typename T>
+class vector{
+public:
+    using iterator = T*;
+    using const_iterator = const T*;
     vector() : my_data(nullptr), my_size(0), my_capacity(0) {};
     vector(const int size, const T elem) : my_size(size), my_capacity(size * 2)
         , my_data(static_cast<T*>(::operator new(sizeof(T)* my_capacity))) {
@@ -46,6 +75,8 @@ public:
     vector(vector&& vec) : my_size(vec.my_size), my_capacity(vec.my_capacity), my_data(vec.my_data) {
         vec.my_data = nullptr;
     }
+
+public:
     vector& operator=(vector&& vec) {
         if (this != &vec) {
             operator delete(my_data);
@@ -70,6 +101,17 @@ public:
         }
         return *this;
     }
+    T& operator[] (const unsigned int index) const {
+        return my_data[index];
+    }
+
+public:
+    iterator begin() const { return my_data; }
+    iterator end() const { return (my_data + my_size); }
+    const_iterator cbegin() const { return my_data; };
+    const_iterator cend() const { return (my_data + my_size); }
+
+public:
     void pop_back() {
         my_data[my_size].~T();
         --my_size;
@@ -95,18 +137,6 @@ public:
         }
         my_size++;
     }
-    unsigned int capacity() const { return my_capacity; }
-    unsigned int size() const { return my_size; }
-    T& operator[] (const unsigned int index) const {
-        return my_data[index];
-    }
-    T& at(const unsigned int index) const {
-        if (index >= my_size) throw std::runtime_error("Index out of range");
-        else return my_data[index];
-    }
-    ~vector() noexcept {
-        clear();
-    };
     void reserve(const unsigned int n) noexcept {
         if (n > my_capacity) {
             my_capacity = n;
@@ -118,6 +148,17 @@ public:
             my_data = tmp;
         }
     }
+
+public:
+    unsigned int capacity() const { return my_capacity; }
+    unsigned int size() const { return my_size; }
+    T& at(const unsigned int index) const {
+        if (index >= my_size) throw std::runtime_error("Index out of range");
+        else return my_data[index];
+    }
+    ~vector() noexcept {
+        clear();
+    };
     void clear() noexcept {
         for (int i = 0; i < my_size; ++i)
             my_data[i].~T();
@@ -126,6 +167,7 @@ public:
         my_size = 0;
         my_capacity = 0;
     }
+
 private:
     unsigned int my_capacity;
     unsigned int my_size;

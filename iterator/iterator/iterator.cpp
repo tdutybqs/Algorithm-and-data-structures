@@ -7,9 +7,9 @@ int main() {
 	a.push_back(10);
 	auto start = a.begin();
 	while (start != a.end()) {
-		std::cout << *start << " " << std::endl;
+		std::cout << (*start) << " " << std::endl;
 		start++;
 	}
-	std::cout <<"Iterator + n = " << a.begin() + 2 << std::endl;
+	std::cout <<"Iterator + n = " << *(a.begin() + 2) << std::endl;
 	std::cout <<"Equality = " << (a.begin() == a.begin()) << std::endl;
 }
