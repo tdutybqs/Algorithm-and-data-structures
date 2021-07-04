@@ -101,7 +101,10 @@ public:
         }
         return *this;
     }
-    T& operator[] (const unsigned int index) const {
+    T& operator[] (const unsigned int index) {
+        return my_data[index];
+    }
+    T operator[] (const unsigned int index) const {
         return my_data[index];
     }
 
@@ -148,6 +151,15 @@ public:
             my_data = tmp;
         }
     }
+    //I'm not sure
+    void erase(iterator it) {
+        if (it >= cend()) { throw std::runtime_error("Iterator out of range"); }
+        while (it != (cend() - 1)) {
+            *it = *(it + 1);
+            ++it;
+        }
+        pop_back();
+    }
 
 public:
     unsigned int capacity() const { return my_capacity; }
@@ -183,7 +195,7 @@ void advance_impl(T& it, typename my_iterator<T>::difference_type n, std::input_
     }
 }
 
-//++ --
+// ++ --
 template <typename T>
 void advance_impl(T& it, typename my_iterator<T>::difference_type n, std::bidirectional_iterator_tag) {
     while (n > 0) {

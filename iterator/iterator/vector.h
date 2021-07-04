@@ -101,7 +101,10 @@ public:
         }
         return *this;
     }
-    T& operator[] (const unsigned int index) const {
+    T& operator[] (const unsigned int index) {
+        return my_data[index];
+    }
+    T operator[] (const unsigned int index) const {
         return my_data[index];
     }
 

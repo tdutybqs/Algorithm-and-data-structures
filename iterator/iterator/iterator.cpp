@@ -3,7 +3,7 @@
 
 
 template <typename T>
-void printVector(vector<T>& a) {
+void printVector(const vector<T>& a) {
 	std::cout << "Size = " << a.size() << std::endl;
 	auto start = a.begin();
 	while (start != a.end()) {
@@ -14,9 +14,8 @@ void printVector(vector<T>& a) {
 
 
 int main() {
-	vector<int> a{ 1,2,3,4 };
-	a.push_back(10);
+	vector<int> const a{ 1,2,3,4 };
 	printVector(a);
-	a.erase(a.begin());
+	//a.erase(a.begin());
 	printVector(a);
 }
