@@ -107,7 +107,22 @@ public:
     T operator[] (const unsigned int index) const {
         return my_data[index];
     }
-
+    bool operator==(const vector& other) const{
+        if (other.size() != my_size) return false;
+        for (size_t i = 0; i < my_size; ++i) {
+            if (my_data[i] != other.my_data[i]) return false;
+        }
+        return true;
+    }
+    bool operator!=(const vector& other) const {
+        return !(*this == other);
+    }
+    bool operator<(const vector& other) const {
+        return my_size < other.size();
+    }
+    bool operator>(const vector& other) const {
+        return !(*this < other);
+    }
 public:
     iterator begin() const { return my_data; }
     iterator end() const { return (my_data + my_size); }

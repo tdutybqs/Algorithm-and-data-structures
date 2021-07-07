@@ -1,6 +1,6 @@
 ﻿  iterator.cpp
-C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(175,27): warning C4018: <: несоответствие типов со знаком и без знака
-C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(174): message : во время компиляции функции-члена класс шаблон "void vector<int>::clear(void) noexcept"
-C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(172): message : выполняется компиляция ссылки на экземпляр шаблон функции "void vector<int>::clear(void) noexcept"
+C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(190,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(189): message : во время компиляции функции-члена класс шаблон "void vector<int>::clear(void) noexcept"
+C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\vector.h(187): message : выполняется компиляция ссылки на экземпляр шаблон функции "void vector<int>::clear(void) noexcept"
 C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\iterator\iterator.cpp(17): message : выполняется компиляция ссылки на экземпляр класс шаблон функции "vector<int>"
   iterator.vcxproj -> C:\Users\Евгений\Desktop\Algorithm and data structures\iterator\Debug\iterator.exe

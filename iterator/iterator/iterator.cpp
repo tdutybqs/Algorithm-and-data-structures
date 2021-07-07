@@ -14,8 +14,12 @@ void printVector(const vector<T>& a) {
 
 
 int main() {
-	vector<int> const a{ 1,2,3,4 };
+	vector<int> a{ 1,2,3,4 };
 	printVector(a);
-	//a.erase(a.begin());
-	printVector(a);
+	vector<int> b{ 1,2,3,4,4 };
+	printVector(b);
+	std::cout << (a == b) << std::endl;
+	std::cout << (a != b) << std::endl;
+	std::cout << (a < b) << std::endl;
+	std::cout << (a > b) << std::endl;
 }
